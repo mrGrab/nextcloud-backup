@@ -116,7 +116,7 @@ def is_hidden(path):
 @click.option("-f", "--folder", required=True, help="Folder for backup")
 @click.option("--hidden", is_flag=True, default=False, help="Upload hidden files")
 def main(url, user, password, folder, hidden):
- 
+    
     counters = {"total": 0,
                 "uploaded": 0,
                 "failed": 0,
@@ -139,7 +139,7 @@ def main(url, user, password, folder, hidden):
     except owncloud.owncloud.HTTPResponseError:
         logger.warning(f"The remote root \"{remote_root}\" does not exist")
         nc.mkdir(remote_root, parents=True)
-        remote_items = [owncloud.FileInfo(remote_root, file_type='dir')]
+        remote_items = []
 
     logger.info(f"Starting backup {folder}")
     bc = Backup(remote_items)
@@ -180,6 +180,7 @@ def main(url, user, password, folder, hidden):
                     counters["failed"] +=1
                     logger.error(f"Unable to upload {local_path}: {err}")
             counters["total"] += 1
+
     # Delete a remote files and directories that are not local
     for item in bc.item_list['file'] + bc.item_list['dir']:
         try:

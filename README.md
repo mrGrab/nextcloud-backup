@@ -10,6 +10,7 @@ Python script for backup local folders to nextcloud
 
 # TODO
 1. exclude folder
+2. Remote delete order
 
 # Documentation
 - https://pypi.org/project/pyocclient/
