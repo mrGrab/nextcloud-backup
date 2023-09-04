@@ -107,7 +107,7 @@ def normalize_path(path):
     return path
 
 def is_hidden(path):
-    return os.path.basename(path).startswith(".")
+    return bool(path.startswith(".") or "/." in path)
 
 @click.command()    
 @click.option("--url", required=True, default=lambda: os.environ.get("url", ""), help="NextCloud url")
